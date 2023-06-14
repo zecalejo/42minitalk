@@ -6,7 +6,7 @@
 #    By: jnuncio- <jnuncio-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/16 15:39:50 by jnuncio-          #+#    #+#              #
-#    Updated: 2023/06/13 19:19:37 by jnuncio-         ###   ########.fr        #
+#    Updated: 2023/06/14 19:09:55 by jnuncio-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC = ft_isalpha.c\
 	ft_putstr_fd.c\
 	ft_split.c\
 	ft_putendl_fd.c\
+	ft_putnbr_base.c\
 	ft_putnbr_fd.c\
 	ft_strmapi.c\
 	ft_striteri.c\
@@ -60,7 +61,9 @@ SRC = ft_isalpha.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
 	get_next_line_utils_bonus.c\
-	get_next_line_bonus.c
+	get_next_line_bonus.c\
+	ft_printf.c\
+	ft_printf_utils.c
 OBJ = $(SRC:%c=bin/%o)
 
 all: $(NAME)

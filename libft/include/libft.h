@@ -6,7 +6,7 @@
 /*   By: jnuncio- <jnuncio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 15:31:49 by jnuncio-          #+#    #+#             */
-/*   Updated: 2023/05/30 02:17:16 by jnuncio-         ###   ########.fr       */
+/*   Updated: 2023/06/14 19:06:44 by jnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 # include <ctype.h>
 # include <fcntl.h>
+# include <stdarg.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -38,6 +40,7 @@ int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+int		ft_putnbr_base(long long n, char *base);
 
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -81,5 +84,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 
 int		ft_lstsize(t_list *lst);
+
+// FT_PRINTF
+
+int		ft_printf(const char *s, ...);
+int		pf_putchar(char c);
+int		pf_putstr(char *s);
+int		pf_putptr_base(size_t n, char *base);
 
 #endif

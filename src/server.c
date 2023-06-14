@@ -6,8 +6,16 @@
 /*   By: jnuncio- <jnuncio-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 18:40:22 by jnuncio-          #+#    #+#             */
-/*   Updated: 2023/06/13 18:40:43 by jnuncio-         ###   ########.fr       */
+/*   Updated: 2023/06/14 18:54:09 by jnuncio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+int	main(int ac, char **av)
+{
+	(void)ac;
+	(void)av;
+
+	ft_printf("Server on!");
+}
