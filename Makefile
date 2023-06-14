@@ -38,30 +38,39 @@ OBJ_CLT = bin/client.o
 all: $(LIBFT) $(BIN) server client
 
 server: $(OBJ_SRV)
-	@$(CC) $(OBJ_SRV) $(LFLAGS) -o server
+	@echo -n "$(YELLOW)Creating server.o... $(RESET)"
+	@$(CC) $(OBJ_SRV) $(LFLAGS) -o server &&\
+	echo "$(GREEN)OK!$(RESET)" || echo "$(RED)KO!$(RESET)"
 
 client: $(OBJ_CLT)
-	@$(CC) $(OBJ_CLT) $(LFLAGS) -o client
+	@echo -n "$(YELLOW)Creating client.o... $(RESET)"
+	@$(CC) $(OBJ_CLT) $(LFLAGS) -o client &&\
+	echo "$(GREEN)OK!$(RESET)" || echo "$(RED)KO!$(RESET)"
 
 $(BIN):
+	@echo "------------------------------------------------------"
+	@echo "$(HL_CYAN)minitalk:$(RESET)";
 	@test -d $(BIN) || (mkdir -p $(BIN) &&\
 	echo "$(GREEN)Created $(BIN) directory.$(RESET)") ||\
 	echo "$(RED)Failed to create $(BIN) directory.$(RESET)"
 
 $(LIBFT): $(LIBFT_BIN)
+	@echo "------------------------------------------------------"
 	@make -C libft --no-print-directory &&\
-	echo "" ; echo -n "$(HL_CYAN)libft:$(RESET)" &&\
+	echo -n "$(HL_CYAN)libft:$(RESET)" &&\
 	echo "$(GREEN) OK!$(RESET)" ||\
 	echo "$(RED) KO!$(RESET)"
 
 $(BIN)/%o: src/%c
-	@echo -n "$(YELLOW)Creating object file... $(RESET)"
-	@$(CC) -c $< $(CFLAGS) -o $@ &&\
-	echo "$(GREEN)OK!$(RESET)" || echo "$(RED)KO!$(RESET)"
-	
+	@$(CC) -c $< $(CFLAGS) -o $@
+
 clean: cleanlib hl_minitalk
-	@test -n "$(wildcard bin/*.o)" && $(RM) $(OBJ) &&\
-	echo "$(GREEN)deleted object files$(RESET)" || true
+	@if [ -n "$(wildcard bin/*.o)" ]; then \
+		$(RM) $(OBJ); \
+		echo "$(GREEN)deleted object files$(RESET)"; \
+	elif [ ! -n "$(wildcard bin/*.o)" ] && ([ -e server ] || [ -e client ]); then \
+		echo "$(YELLOW)there are no object files$(RESET)"; \
+	fi
 	@test -d $(BIN) && $(RM) $(BIN) &&\
 	echo "$(GREEN)deleted $(BIN) directory$(RESET)" || true
 	
@@ -72,9 +81,12 @@ fclean: cleanlib fcleanlib clean hl_minitalk
 	echo "$(GREEN)deleted client$(RESET)" || true
 
 cleanlib: hl_libft
-	@test -n "$(wildcard libft/bin/*.o)" &&\
-	make clean -C libft --no-print-directory &&\
-	echo "$(GREEN)deleted object files$(RESET)" || true
+	@if [ -n "$(wildcard libft/bin/*.o)" ]; then \
+		make clean -C libft --no-print-directory; \
+		echo "$(GREEN)deleted object files$(RESET)"; \
+	elif [ ! -n "$(wildcard libft/bin/*.o)" ] && [ -e libft/libft.a ]; then \
+		echo "$(YELLOW)there are no object files$(RESET)"; \
+	fi
 
 fcleanlib: hl_libft
 	@test -e libft/libft.a &&\
@@ -82,10 +94,11 @@ fcleanlib: hl_libft
 	echo "$(GREEN)deleted libft.a$(RESET)" || true
 
 hl_minitalk:
-	@if [ -n "$(wildcard bin/*.o)" -o -e server -o -e client ]; then \
-		echo "$(HL_CYAN)minitalk:$(RESET)"; \
-	else \
+	@echo "------------------------------------------------------"
+	@if [ ! -n "$(wildcard bin/*.o)" ] && [ ! -e server ] && [ ! -e client ]; then \
 		echo "$(HL_CYAN)minitalk:$(RESET)$(YELLOW) nothing to clean$(RESET)"; \
+	else \
+		echo "$(HL_CYAN)minitalk:$(RESET)"; \
 	fi
 
 hl_libft:
