@@ -6,7 +6,7 @@
 #    By: jnuncio- <jnuncio-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/13 18:12:45 by jnuncio-          #+#    #+#              #
-#    Updated: 2023/06/14 20:41:14 by jnuncio-         ###   ########.fr        #
+#    Updated: 2023/06/17 14:13:07 by jnuncio-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,12 +38,12 @@ OBJ_CLT = bin/client.o
 all: $(LIBFT) $(BIN) server client
 
 server: $(OBJ_SRV)
-	@echo -n "$(YELLOW)Creating server.o... $(RESET)"
+	@echo -n "Creating server.o... "
 	@$(CC) $(OBJ_SRV) $(LFLAGS) -o server &&\
 	echo "$(GREEN)OK!$(RESET)" || echo "$(RED)KO!$(RESET)"
 
 client: $(OBJ_CLT)
-	@echo -n "$(YELLOW)Creating client.o... $(RESET)"
+	@echo -n "Creating client.o... "
 	@$(CC) $(OBJ_CLT) $(LFLAGS) -o client &&\
 	echo "$(GREEN)OK!$(RESET)" || echo "$(RED)KO!$(RESET)"
 
